@@ -1,0 +1,104 @@
+import java.awt.BorderLayout;
+import java.awt.Desktop;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import com.barcodelib.barcode.QRCode;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.awt.event.ActionEvent;
+
+public class qqrr extends JFrame {
+   
+	private JPanel contentPane;
+	private JTextField textField;
+
+	int und=0, resol=70,rot=0;
+	float mi=0.00f, md=0.000f, ms=0.000f, min=0.00f, tam=5.00f;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					qqrr frame = new qqrr();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+  public void generarQR(String datos ) {
+	 
+	QRCode code = new QRCode();  
+	code.setData(datos);
+	code.setDataMode(QRCode.MODE_BYTE);
+	code.setUOM(und);
+	code.setLeftMargin(mi);
+	code.setRightMargin(md);
+	code.setTopMargin(ms);
+	code.setBottomMargin(min);
+	
+	code.setResolution(resol);
+	code.setRotate(rot);
+	code.setModuleSize(tam);
+	
+	String archivo=System.getProperty("user.home")+"/imagen QR.gif";
+	
+	try {
+		code.renderBarcode(archivo);
+		
+		Desktop d=Desktop.getDesktop();
+		d.open(new File(archivo));
+	} catch (Exception e) {
+			System.out.println("error /n");
+		
+	}
+	
+	
+	  
+  }
+	/**
+	 * Create the frame.
+	 */
+	public qqrr() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 578, 415);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JButton btnNewButton = new JButton("code.QR");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String campo=textField.getText();
+				
+				generarQR(campo);
+				textField.setText("");
+				
+			}
+		});
+		btnNewButton.setBounds(165, 114, 89, 23);
+		contentPane.add(btnNewButton);
+		
+		JLabel lblNewLabel = new JLabel("QR:");
+		lblNewLabel.setBounds(70, 30, 46, 14);
+		contentPane.add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setBounds(59, 83, 302, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+	}
+}

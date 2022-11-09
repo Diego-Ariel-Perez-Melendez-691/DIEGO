@@ -1,0 +1,12 @@
+INDEX VERSION 1.131+C:\Users\Alumno.SALA2-PC21\Desktop\karol511\CRUDAlineacion\.metadata\.plugins\org.eclipse.jdt.core
+3283808101.index
+1759235183.index
+2063755994.index
+136124448.index
+1650449417.index
+635046784.index
+55576696.index
+1865797976.index
+752611538.index
+3361133617.index
+2023717660.index
